@@ -4,8 +4,8 @@ import os
 def main():
     scene = tkinter.Tk()    # how to do this from tutorialspoint.com
 
-    def quitButton():
-        scene.destroy() # closes window
+    def quitButton(window):
+        window.destroy() # closes window
     
 
     def readIn(fileName):
@@ -19,6 +19,9 @@ def main():
             else:
                 fullList.append(listEntry)
                 listEntry = ""
+        popup = tkinter.Tk()
+        tkinter.Label(popup, text=fullList).grid(row=0,column=0)
+        tkinter.Button(popup, text="Ok", command = lambda : quitButton(popup)).grid(row=1,column=0)
         print(fullList)
 
 
@@ -32,7 +35,7 @@ def main():
         tkinter.Button(scene, text = "Choose this file", command = lambda files=files: readIn(files)).grid(row = r, column = 1)
         r = r+1
         # quit button here vvv
-    tkinter.Button(scene, text = "Quit", command = lambda : quitButton()).grid(row = r+1, column = 0)
+    tkinter.Button(scene, text = "Quit", command = lambda : quitButton(scene)).grid(row = r+1, column = 0)
 
 
     scene.mainloop()
